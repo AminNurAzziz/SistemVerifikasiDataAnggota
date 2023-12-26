@@ -1,0 +1,55 @@
+<% layout('layout/boilerplate') %>
+<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <img src="/assets/img/logo.png" alt="Bootstrap" width="65" />
+            <span class="fs-4">PSHT Sambeng</span>
+        </a>
+        <form id="searchForm" class="d-flex" action="/" method="GET">
+            <input
+                id="niwInput"
+                class="form-control me-2"
+                type="search"
+                name="niw"
+                placeholder="Masukkan NIW"
+                aria-label="Search"
+            />
+            <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<section id="resultSection" class="mt-5 d-flex justify-content-center">
+    <% if (warga && warga!="empty") { %>
+    <div id="wargaCard" class="card" style="max-width: 18rem; width: 100%">
+        <div class="card-header bg-dark text-white">Data Warga</div>
+        <ul id="wargaList" class="list-group list-group-flush">
+            <!-- Data warga akan ditampilkan di sini -->
+            <li class="list-group-item">NIW: <%= warga.niw %></li>
+            <li class="list-group-item">Nama: <%= warga.nama %></li>
+            <li class="list-group-item">Alamat: <%= warga.alamat %></li>
+            <li class="list-group-item">
+                TTL: <%= warga.tempatLahir %>, <%= warga.tanggalLahir %>
+            </li>
+            <li class="list-group-item">
+                Jenis Kelamin: <%= warga.jenisKelamin %>
+            </li>
+            <li class="list-group-item">Ranting: <%= warga.rayon.ranting %></li>
+            <li class="list-group-item">Rayon: <%= warga.rayon.namaRayon %></li>
+            <li class="list-group-item">
+                Tahun Pengesahan: <%= warga.tahunPengesahan %>
+            </li>
+        </ul>
+    </div>
+    <% } else if(warga==null) { %>
+    <!-- Menampilkan pesan bahwa tidak ada data warga yang ditemukan -->
+    <div id="noDataMessage" class="alert alert-dark" role="alert">
+        Tidak ada data warga yang ditemukan.
+    </div>
+    <% }else{ %>
+    <div>
+        <h1>Selamat Datang Dulurrr</h1>
+        <p>Memayu Hayuning Bawana</p>
+    </div>
+    <% } %>
+</section>

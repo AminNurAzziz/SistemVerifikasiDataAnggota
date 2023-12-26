@@ -1,0 +1,40 @@
+<% layout('layout/boilerplate') %> 
+<%- include('partials/navbar') %>
+    <div id="layoutSidenav_content">
+        <div style="height: 100vh;" class="container formAdd px-md-5 p-md-5 mt-3 py-md-2" >
+                    <div class="row justify-content-center">
+                        <div class="col-md-7 col-12">
+                            <form action="/rayon/rayon/add" method="post">
+                                
+                            <!-- Ranting -->
+                            <div class="mb-3">
+                                <label for="ranting" class="form-label"><b>Ranting</b></label>
+                                <input type="text" class="form-control" id="ranting" name="ranting" value="Sambeng" readonly required>
+                            </div>
+
+                                <div class="row">
+                                    <!-- Rayon -->
+                                    <div class="col-6">
+                                        <label for="namaRayon" class="form-label"><b>Nama Rayon</b></label>
+                                        <input type="text" class="form-control" id="namaRayon" name="namaRayon" required>   
+                                    </div>
+                                    <!-- Ketua Rayon -->
+                                    <div class="col-6">
+                                        <label for="namaKetuaRayon" class="form-label"><b>Ketua Rayon</b></label>
+                                        <input type="text" class="form-control" id="namaKetuaRayon" name="namaKetuaRayon" required>
+                                    </div>
+                                </div>
+
+                                <!-- Alamat -->
+                                <div class="mb-3">
+                                    <label for="alamat" class="form-label"><b>Alamat</b></label>
+                                    <textarea class="form-control" id="alamat" name="alamat" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-danger">Submit</button>
+                            </form>
+                        </div>
+                    </div>  
+        </div>
+    </div>
+</div>     
+

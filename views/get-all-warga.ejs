@@ -1,0 +1,94 @@
+<% layout('layout/boilerplate') %> 
+<%- include('partials/navbar') %>
+<div id="layoutSidenav_content">
+    <div class="container formAdd px-md-5 mt-2 py-md-2" style="height: 100vh;">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Data Warga
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">NIW</th>
+                            <th scope="col">Warga</th>
+                            <th scope="col">Thn Pengesahan</th>
+                            <th scope="col">Rayon</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">TTL</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (var i = 0; i < warga.length; i++) { %>
+                            <tr>
+                                <th scope="row"><%= i + 1 %></th>
+                                <td><%= warga[i].niw %></td>
+                                <td><%= warga[i].nama %></td>
+                                <td><%= warga[i].tahunPengesahan %></td>
+                                <td><%= warga[i].rayon.namaRayon %></td>
+                                <td><%= warga[i].alamat %></td>
+                                <td><%= warga[i].tempatLahir %>, <%= warga[i].tanggalLahir %></td>
+                                <td><%= warga[i].jenisKelamin %></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal<%= i %>">
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <div class="ms-1">
+                                            <form action="/admin/warga/<%= warga[i]._id %>?_method=DELETE" method="POST">
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="editModal<%= i %>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel">Edit Warga</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Your edit form goes here -->
+                                            <form action="/admin/warga/<%= warga[i]._id %>?_method=PUT" method="POST">
+                                                <div class="mb-3">
+                                                    <label for="niw" class="form-label">NIW</label>
+                                                    <input type="text" class="form-control" id="niw" name="niw" value="<%= warga[i].niw %>" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="nama" class="form-label">Nama</label>
+                                                    <input type="text" class="form-control" id="nama" name="nama" value="<%= warga[i].nama %>" required>
+                                                </div>
+
+                                                <!-- Jenis Kelamin -->
+                                                <div class="mb-3">
+                                                    <label for="jenisKelamin" class="form-label"><b>Jenis Kelamin</b></label>
+                                                    <select class="form-select" id="jenisKelamin" name="jenisKelamin" required>
+                                                        <option value="Laki-laki" <% if (warga[i].jenisKelamin === 'Laki-laki') { %> selected <% } %>>Laki-laki</option>
+                                                        <option value="Perempuan" <% if (warga[i].jenisKelamin === 'Perempuan') { %> selected <% } %>>Perempuan</option>
+                                                    </select>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-warning">Save Changes</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

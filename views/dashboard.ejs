@@ -1,0 +1,98 @@
+<% layout('layout/boilerplate') %> <%- include('partials/navbar') %>
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            <h1 class="mt-4">Dashboard</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active">Memayu Hayuning Bawana</li>
+            </ol>
+            <div class="row">
+                <div class="col-xl-3 col-md-6 col-6">
+                    <div class="card bg-dark text-white mb-4">
+                        <div class="card-body">Total Warga</div>
+                        <h4 class="text-center"><%= warga.length %></h4>
+                        <div
+                            class="card-footer d-flex align-items-center justify-content-between"
+                        >
+                            <a class="small text-white stretched-link" href="/admin/warga"
+                                >View Details</a
+                            >
+                            <div class="small text-white">
+                                <i class="fas fa-angle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-6">
+                    <div class="card bg-light text-dark mb-4">
+                        <div class="card-body">Total Rayon</div>
+                        <h4 class="text-center"><%= rayon.length %></h4>
+                        <div
+                            class="card-footer d-flex align-items-center justify-content-between"
+                        >
+                            <a class="small text-dark stretched-link" href="/rayon/rayon "
+                                >View Details</a
+                            >
+                            <div class="small text-darkk">
+                                <i class="fas fa-angle-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Data Rayon
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Rayon</th>
+                                <th scope="col">Jumlah Warga</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% if (rayon.length === 0) { %>
+                                <tr>
+                                    <td colspan="3">Tidak ada data rayon yang ditemukan.</td>
+                                </tr>
+                            <% } else { %>
+                                <% rayon.forEach((rayons, rayonIndex) => { %>
+                                    <tr>
+                                        <th scope="row"><%= rayonIndex + 1 %> </th>
+                                        <td><%= rayons.namaRayon %></td>
+                                        <td>
+                                            <% const filteredWarga = warga.filter(wargas => wargas.rayon.namaRayon == rayons.namaRayon); %>
+                                            <%= filteredWarga.length %><br />
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            <% } %>
+                        </tbody>
+                        
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid px-4">
+            <div
+                class="d-flex align-items-center justify-content-between small"
+            >
+                <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

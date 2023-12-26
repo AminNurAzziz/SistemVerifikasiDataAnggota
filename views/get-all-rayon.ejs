@@ -1,0 +1,84 @@
+<% layout('layout/boilerplate') %>
+<%- include('partials/navbar') %>
+
+<div id="layoutSidenav_content">
+    <div class="container formAdd px-md-5 mt-2 py-md-2" style="height: 100vh;">
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                <b class="fs-5"> Data Rayon</b> - Ranting Sambeng
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Rayon</th>
+                            <th scope="col">Ketua Rayon</th>
+                            <th scope="col">Alamat</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (var i = 0; i < rayon.length; i++) { %>
+                            <tr>
+                                <th scope="row"><%= i + 1 %></th>
+                                <td><%= rayon[i].namaRayon %></td>
+                                <td><%= rayon[i].namaKetuaRayon %></td>
+                                <td><%= rayon[i].alamat %></td>
+                                <td>
+                                    <div class="d-flex">
+                                        <div>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal<%= i %>">
+                                                Edit
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="editModal<%= i %>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editModalLabel">Edit Rayon</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Your edit form goes here -->
+                                                            <form action="/rayon/rayon/<%= rayon[i].id %>?_method=PATCH" method="POST">
+                                                                <div class="mb-3">
+                                                                    <label for="namaRayon" class="form-label">Nama Rayon</label>
+                                                                    <input type="text" class="form-control" id="namaRayon" name="namaRayon" value="<%= rayon[i].namaRayon %>" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="namaKetuaRayon" class="form-label">Ketua Rayon</label>
+                                                                    <input type="text" class="form-control" id="namaKetuaRayon" name="namaKetuaRayon" value="<%= rayon[i].namaKetuaRayon %>" required>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="alamat" class="form-label">Alamat</label>
+                                                                    <textarea class="form-control" id="alamat" name="alamat" rows="3" required><%= rayon[i].alamat %></textarea>
+                                                                </div>
+                                                                <!-- Add other fields as needed -->
+
+                                                                <button type="submit" class="btn btn-warning">Save Changes</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="ms-1">
+                                            <form action="/rayon/rayon/<%= rayon[i].id %>?_method=DELETE" method="POST">
+                                                <button class="btn btn-danger" type="submit">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

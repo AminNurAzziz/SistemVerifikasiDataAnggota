@@ -1,0 +1,32 @@
+<% layout('layout/boilerplate') %> 
+    <div id="layoutSidenav_content">
+        <div style="height: 100vh;" class="container formAdd px-md-5 p-5 mt-3 py-md-2" >
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 col-12 mt-5 pt-5">
+                            <form
+                            action="/login"
+                            method="POST"
+                            class="needs-validation"
+                            novalidate
+                            >
+                                
+                            <!-- username -->
+                            <div class="mb-3">
+                                <label for="username" class="form-label"><b>Username</b></label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label"><b>Password</b></label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            </div>
+
+
+                                <button type="submit" class="btn btn-danger">Submit</button>
+                            </form>
+                        </div>
+                    </div>  
+        </div>
+    </div>
+</div>     
+
+

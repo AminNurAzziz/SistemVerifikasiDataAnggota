@@ -1,0 +1,106 @@
+<% layout('layout/boilerplate') %> 
+<%- include('partials/navbar') %>
+<div id="layoutSidenav_content">
+    <div class="container formAdd px-md-5 py-md-2" >
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-8 col-12 ">
+                <form action="/admin/warga/add" method="post">
+                    
+                <!-- Ranting -->
+                <div class="mb-3">
+                    <label for="ranting" class="form-label"><b>Ranting</b></label>
+                    <input type="text" class="form-control" id="ranting" name="ranting" value="Sambeng" readonly required>
+                </div>
+
+                    <!-- Rayon -->
+                    <div class="mb-3">
+                        <label for="rayon" class="form-label"><b>Rayon</b></label>
+                        <select class="form-control" id="rayon" name="rayon" required>
+                            <%  for(var i=0; i<rayon.length; i++) { %> 
+                                <option value="<%= rayon[i]._id %>"><%= rayon[i].namaRayon %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <!-- NIW -->
+                        <div class="col-4">
+                            <label for="niw" class="form-label"><b>NIW</b></label>
+                            <input type="text" class="form-control" id="niw" name="niw" required>
+                        </div>
+
+                        <!-- Nama -->
+                        <div class="col-8">
+                            <label for="nama" class="form-label"><b>Nama</b></label>
+                            <input type="text" class="form-control" id="nama" name="nama" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Tempat Lahir -->
+                        <div class="col">
+                            <label for="tempatLahir" class="form-label"><b>Tempat Lahir</b></label>
+                            <input type="text" class="form-control" id="tempatLahir" name="tempatLahir" required>
+                        </div>
+                        <!-- Tanggal Lahir -->
+                        <div class="col">
+                            <label for="tanggalLahir" class="form-label"><b>Tanggal Lahir</b></label>
+                            <input type="date" class="form-control" id="tanggalLahir" name="tanggalLahir" required>
+                        </div>
+
+                    </div>
+                    <!-- Jenis Kelamin -->
+                    <div class="mb-3">
+                        <label for="jenisKelamin" class="form-label"><b>Jenis Kelamin</b></label>
+                        <select class="form-select" id="jenisKelamin" name="jenisKelamin" required>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+
+                    <!-- Tahun Pengesahan -->
+                    <div class="mb-3">
+                        <label for="tahunPengesahan" class="form-label"><b>Tahun Pengesahan</b></label>
+                        <select class="form-control" id="tahunPengesahan" name="tahunPengesahan" required>
+                            <!-- Generate opsi tahun dari 1999 hingga 2020 -->
+                            <option value="" disabled selected>Pilih Tahun</option>
+                            <!-- Anda dapat mengganti rentang tahun sesuai kebutuhan -->
+                            <!-- Contoh rentang tahun dari 1999 hingga 2020 -->
+                            <% for (let year = 1899; year <= 2100; year++) { %>
+                                <option value="<%= year %>"><%= year %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <!-- Alamat -->
+                    <div class="mb-3">
+                        <label for="alamat" class="form-label"><b>Alamat</b></label>
+                        <textarea class="form-control" id="alamat" name="alamat" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                </form>
+            </div>
+        </div>  
+    </div>   
+</div>
+</div>  
+
+<!-- JavaScript untuk mendapatkan nilai saat opsi berubah -->
+<script>
+document.getElementById("tahunPengesahan").addEventListener("change", function() {
+    const selectedYear = this.value;
+    console.log(new Date(selectedYear, 0, 1));
+});
+
+const rayonSelect = document.getElementById("rayon");
+const ranting = document.getElementById("ranting");
+const rayonData= <%- JSON.stringify(rayon) %>;
+
+rayonSelect.addEventListener("change", function() {
+    console.log(this.value);
+    const selectedOption = rayonSelect.options[rayonSelect.selectedIndex];
+    const selectedRayonId = selectedOption.value;
+    const selectedRayon = rayonData.find(rayon => rayon._id === selectedRayonId);
+    if (selectedRayon) {
+        ranting.value = selectedRayon.ranting;
+    }
+});
+</script>
